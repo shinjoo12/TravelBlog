@@ -14,27 +14,28 @@
             Travel Blog
         </div>
         <nav id="nav2">
-
             <ul>
                 <li><a href="#">여행 일정</a></li>
-                <li style="margin-left: 20px;"><a href="#">여행 기간</a></li>
-                <li><a href="#">일정 저장</a></li>
-                <li style="margin-left: 20px;"><a href="#">추천 장소</a></li>
+                <li>
+                    <a href="#">여행 기간</a>
+                    <div id="calendar-container">
+                        <ul class="calendar" id="calendar">
+
+                        </ul>
+                    </div>
+                </li>
+                <button class="button_1">일정 저장</button>
+
+                <li><a href="location">추천 장소</a></li>
             </ul>
         </nav>
-        <div class="calendar-container" id="calendar-container">
-            <ul class="calendar" id="calendar"></ul>
-        </div>
+
         <div class="left-panel1">
             <ul class="place-list" id="places-container">
                 <!-- 동적으로 추가될 장소들을 위한 자리 -->
-
             </ul>
 
-            <div>
-                <input type="text" id="place-name-input" placeholder="장소 이름 입력">
-                <button onclick="addCustomPlace()">추가</button>
-            </div>
+
         </div>
 
     </div>
@@ -48,6 +49,7 @@
 </div>
 
 <script>
+
     var mapContainer = document.getElementById('map');
     var mapOption = {
         center: new kakao.maps.LatLng(37.5665, 126.9780),
@@ -99,15 +101,16 @@
     }
 
     document.addEventListener('DOMContentLoaded', function() {
+        // URL에서 날짜 정보 파라미터 가져오기
         const urlParams = new URLSearchParams(window.location.search);
         const selectedDates = urlParams.get('dates');
         if (selectedDates) {
-            const datesArray = selectedDates.split(',');
+            const datesArray = selectedDates.split(','); // 날짜를 배열로 변환
             const calendarContainer = document.getElementById('calendar-container');
             const ul = calendarContainer.querySelector('.calendar');
             datesArray.forEach(date => {
                 const li = document.createElement('li');
-                li.textContent = date;
+                li.textContent = date; // 각 날짜를 리스트 아이템에 추가
                 ul.appendChild(li);
             });
         }
@@ -118,18 +121,15 @@
         var placeName = placeNameInput.value.trim();
 
         if (placeName !== '') {
-            // 새로운 리스트 아이템 생성
             var li = document.createElement('li');
-            li.textContent = placeName;
-            document.getElementById('places-container').appendChild(li);
+            li.textContent = placeName; // 입력된 장소 이름으로 리스트 아이템 생성
+            document.getElementById('places-container').appendChild(li); // 장소 리스트에 추가
 
-            // 입력 필드 초기화
-            placeNameInput.value = '';
+            placeNameInput.value = ''; // 입력 필드 초기화
         } else {
-            alert('장소 이름을 입력하세요.');
+            alert('장소 이름을 입력하세요.'); // 장소 이름이 입력되지 않았을 때 알림
         }
     }
-
 
 </script>
 
