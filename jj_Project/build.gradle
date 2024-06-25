@@ -18,6 +18,7 @@ repositories {
 }
 
 dependencies {
+
     implementation "org.springframework:spring-core:6.1.6"
     implementation "org.springframework:spring-context:6.1.6"
     implementation "org.springframework:spring-beans:6.1.6"
